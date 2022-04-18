@@ -4,7 +4,8 @@ public class Car{
      String model;
      String brand;
      int year;
-     private static String location;
+     protected static String location;
+     double gasConsumption;
     
     //Car constructor
     public Car(String name, String model, String brand, int year, String location){
@@ -15,11 +16,13 @@ public class Car{
         Car.location = location;
     }
 
+
     //Method for displaying current location (Activity 1)
     public static void displayCurrentLocation(Car cars){
         System.out.println("\n*Initial Location*");
-        System.out.println("Name: " + cars.getName() + "\nModel: " + cars.getModel()+ "\nBrand: " +  cars.getBrand()+ "\nYear: " + cars.getYear()+ "\nLocation: " + Car.getLocation());
+        System.out.println("Name: " + cars.getName() + "\nModel: " + cars.getModel()+ "\nBrand: " +  cars.getBrand()+ "\nYear: " + cars.getYear()+ "\nLocation: " + cars.getLocation());
     }
+
 
 
     //Method for setting the place travelled(destination) and displaying location after travelling (Activity 1 and 2)
@@ -31,30 +34,42 @@ public class Car{
     }
 
     //Method for setting the place travelled(destination) and calls the method for displaying location after travelling and gas remaining (Activity 3)
-    public static void travel(Car cars) {
+    public void travel(Car cars) {
         Scanner sc = new Scanner(System.in);  
         double gas = 10;    
         System.out.print("Enter destination: ");
         String destination = sc.nextLine();
         System.out.print("Enter the distance: ");
         double distance = sc.nextDouble();
+        
         //Call calculateGasUsed method and Set the gas of the car to gas deducted by the gas used
-        gas=gas-calculateGasUsed(distance);
-        displayCurrentLocationAndGasRemaining(gas,destination);
-        sc.close();
+        gasConsumption = calculateGasUsed(distance);
+        gas=gas-gasConsumption;
+        displayCurrentLocationAndGasRemaining(gas,destination, gasConsumption);
+      
+        
     }
+    
+
+
     //Method for calculating gas used (Activity 3)
-    public static double calculateGasUsed(double distance) {
+    public double calculateGasUsed(double distance) {
         double kmPerLitter = 15.5;
-        return kmPerLitter / distance;
+        gasConsumption = distance / kmPerLitter;
+        return gasConsumption;
     }
     //Method for displaying location after travelling and gas remaining (Activity 3)
-    public static void displayCurrentLocationAndGasRemaining(double gas, String destination){
-        System.out.print("\nAfter travelling from" +Car.getLocation()+ " to ");
+    public static void displayCurrentLocationAndGasRemaining(double gas, String destination, double gasConsumption){
+        System.out.print("\nAfter travelling from " + Car.getLocation() + " to ");
         //set location to destination
         Car.setLocation(destination);
-        System.out.print(destination +", the remaining Gas is " + gas + " litter(s).");
+        System.out.print(destination +" the gas consumed is "+gasConsumption+" and the remaining Gas is " + gas + " litter(s).");
+        //System.out.print(destination +" the remaining Gas is " + gas + " litter(s).");
+        System.out.println("\n------------------------------------------------------------------------------------------");
+       
     }
+   
+
 
     public String getName() {
         return name;
@@ -96,6 +111,8 @@ public class Car{
     public static void setLocation(String location) {
         Car.location = location;
     }
+
+    public Car(){}
 
     
     
