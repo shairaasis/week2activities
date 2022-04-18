@@ -88,9 +88,9 @@ public class Main {
             //Car.displayCurrentLocation(cars[index]);
         }
 
-        for(int i=0; i<=car.length;i++){
+        /*for(int i=0; i<=car.length;i++){
             System.out.println("Name: " +car[i].name+ " Model: " +car[i].model+ "   Brand: " + car[i].brand+ "  Year: " + car[i].year + "   Sound: "+ car[i].carSound+ " Location: " + car[i].location+ "   Destination: ");
-        }
+        }*/
 
         
 
