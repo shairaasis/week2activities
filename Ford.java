@@ -1,27 +1,33 @@
-public class Ford extends Car {
-    String carSound;
+public class Ford extends Car{
+    static String carSound;
+
     
-    
-    public Ford(String name, String model, String brand, int year, String carSound, String location){
+    public Ford(String carSound, String name, String model, String brand, int year, String location){
         super(name, model, brand, year, location);
         this.carSound = carSound;
-        this.name = name;
-        this.model = model;
-        this.brand = brand;
-        this.year = year;
-        this.location = location;
-       
     }
 
-    public String getCarSound() {
+    public Ford(){
+
+    }
+    //overload travel method by calling travel in car class to retain functionality and added functionality of dispalying the car sound
+    String travelFord(Ford fordCars){
+        super.travel(fordCars);
+        System.out.println("Car Sound: " + getCarSound());
+        return newLocation;
+
+    }
+
+    public static String getCarSound() {
         return carSound;
     }
 
-    public void setCarSound(String carSound) {
-        this.carSound = carSound;
+    public static void setCarSound(String carSound) {
+        Ford.carSound = carSound;
     }
 
- 
+
+
 
     
 }

@@ -1,90 +1,79 @@
 import java.util.Scanner;
-public class Car{
-     String name;
-     String model;
-     String brand;
-     int year;
-     protected static String location;
-     double gasConsumption;
-    
-    //Car constructor
+public class Car {
+    String name, brand, model;
+    int year;
+    private String location;
+    double gas=50, gasConsumption;
+    String newLocation;
+
     public Car(String name, String model, String brand, int year, String location){
         this.name = name;
         this.model = model;
         this.brand = brand;
         this.year = year;
-        Car.location = location;
+        this.location = location;
     }
 
 
-    //Method for displaying current location (Activity 1)
-    public static void displayCurrentLocation(Car cars){
+    void displayCurrentLocation(Car cars){
         System.out.println("\n*Initial Location*");
         System.out.println("Name: " + cars.getName() + "\nModel: " + cars.getModel()+ "\nBrand: " +  cars.getBrand()+ "\nYear: " + cars.getYear()+ "\nLocation: " + cars.getLocation());
     }
-
-
-
-    //Method for setting the place travelled(destination) and displaying location after travelling (Activity 1 and 2)
-    public static void travel(String location) {
-        //setDestination("Leyte");
-        setLocation("Leyte");
+    //Travel method for Activity 1 and 2
+    String travel(String location){
+        String newLocation = "Tacloban";
+        setLocation(newLocation);  
         System.out.println("\n*After Travelling*");
         System.out.println("Location: " + getLocation());
-    }
+        return newLocation;
 
-    //Method for setting the place travelled(destination) and calls the method for displaying location after travelling and gas remaining (Activity 3)
-    public void travel(Car cars) {
+    }
+    //Overloaded Travel method(has different parameter) for Activity 3 and 5
+    String travel(Car cars){
         Scanner sc = new Scanner(System.in);  
-        double gas = 10;    
         System.out.print("Enter destination: ");
-        String destination = sc.nextLine();
-        System.out.print("Enter the distance: ");
+        newLocation = sc.nextLine();
+        System.out.print("Enter the distance(km) from current location to destination: ");
         double distance = sc.nextDouble();
         
         //Call calculateGasUsed method and Set the gas of the car to gas deducted by the gas used
         gasConsumption = calculateGasUsed(distance);
         gas=gas-gasConsumption;
-        displayCurrentLocationAndGasRemaining(gas,destination, gasConsumption);
-      
-        
+        displayNewLocationGasAndGasConsumption(cars, gas, newLocation, gasConsumption);
+        return newLocation;
     }
-    
-
 
     //Method for calculating gas used (Activity 3)
     public double calculateGasUsed(double distance) {
+        //gas consumption is kmPerLitter
         double kmPerLitter = 15.5;
         gasConsumption = distance / kmPerLitter;
         return gasConsumption;
     }
-    //Method for displaying location after travelling and gas remaining (Activity 3)
-    public static void displayCurrentLocationAndGasRemaining(double gas, String destination, double gasConsumption){
-        System.out.print("\nAfter travelling from " + Car.getLocation() + " to ");
+
+    void displayNewLocationGasAndGasConsumption(Car cars, double gas, String newLocation, double gasConsumption){
+        System.out.print("\nAfter travelling from " + cars.getLocation() + " to ");
         //set location to destination
-        Car.setLocation(destination);
-        System.out.print(destination +" the gas consumed is "+gasConsumption+" and the remaining Gas is " + gas + " litter(s).");
+        cars.setLocation(newLocation);
+        System.out.print(newLocation +" the gas consumed is "+gasConsumption+" and the remaining Gas is " + gas + " litter(s).");
         //System.out.print(destination +" the remaining Gas is " + gas + " litter(s).");
         System.out.println("\n------------------------------------------------------------------------------------------");
-       
+        System.out.println("Name: " + cars.getName() + "\nModel: " + cars.getModel()+ "\nBrand: " +  cars.getBrand()+ "\nYear: " + cars.getYear()+ "\nLocation: " + cars.getLocation());
     }
-   
 
 
+    public Car(){
+
+    }
+
+
+    //Getters and Setters
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
     }
 
     public String getBrand() {
@@ -95,6 +84,14 @@ public class Car{
         this.brand = brand;
     }
 
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
     public int getYear() {
         return year;
     }
@@ -103,17 +100,26 @@ public class Car{
         this.year = year;
     }
 
-    
-    public static String getLocation() {
+    public String getLocation() {
         return location;
     }
 
-    public static void setLocation(String location) {
-        Car.location = location;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
-    public Car(){}
+    public double getGasConsumption() {
+        return gasConsumption;
+    }
 
-    
+    public void setGasConsumption(double gasConsumption) {
+        this.gasConsumption = gasConsumption;
+    }
+
+
+
+     //getters and setters
+     
+
     
 }
